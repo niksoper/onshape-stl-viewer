@@ -1,9 +1,12 @@
 (function() {
   $.ready(function() {
     $('#get-elements').click(getElements)
+    displayOutput('Ready!')
   })
 
   function getElements() {
+    displayOutput('Getting elements')
+
     var dfd = $.Deferred();
     $.ajax('/api/elements'+ window.location.search, {
         dataType: 'json',
@@ -11,7 +14,8 @@
         success: function(data) {
            displayOutput(data)
         },
-        error: function() {
+        error: function(err) {
+          displayOutput(err)
         }
     });
     return dfd.promise();
