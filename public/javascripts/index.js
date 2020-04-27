@@ -33,7 +33,7 @@ function getParts() {
 }
 
 function getConfiguration() {
-  var queryParams = '?documentId=' + getQueryParam('documentId') + '&workspaceId=' getQueryParam('workspaceId') + '&elementId=' + partStudioElementId
+  var queryParams = '?documentId=' + getQueryParam('documentId') + '&workspaceId=' + getQueryParam('workspaceId') + '&elementId=' + partStudioElementId
   return apiGet('Getting configuration', '/api/configuration', function(parts) {
     displayOutput(JSON.stringify(parts, null, 2))
   }, queryParams)
