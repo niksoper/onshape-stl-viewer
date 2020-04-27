@@ -29,7 +29,7 @@ function apiGet(placeholder, apiPath, onResponse) {
       dataType: 'json',
       type: 'GET',
       success: onResponse,
-      error: displayOutput(err),
+      error: displayOutput,
   });
 
   return dfd.promise();
