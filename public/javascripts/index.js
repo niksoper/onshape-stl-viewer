@@ -17,7 +17,7 @@ function getElements() {
       dataType: 'json',
       type: 'GET',
       success: function(data) {
-         displayOutput(data)
+         displayOutput(JSON.stringify(data, null, 2))
       },
       error: function(err) {
         displayOutput(err)
