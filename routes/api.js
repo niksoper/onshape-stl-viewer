@@ -104,6 +104,27 @@ var getPartsList = function(req, res) {
   });
 };
 
+var getConfiguration = function(req, res) {
+  request.get({
+    uri: `${apiUrl}/elements/d/${req.query.documentId}/e/${req.query.elementId}/configuration'`,
+    headers: {
+      'Authorization': 'Bearer ' + req.user.accessToken
+    }
+  }).then(function(data) {
+    res.send(data);
+  }).catch(function(data) {
+    if (data.statusCode === 401) {
+      authentication.refreshOAuthToken(req, res).then(function() {
+        getConfiguration(req, res);
+      }).catch(function(err) {
+        console.log('Error refreshing token or getting configuration: ', err);
+      });
+    } else {
+      console.log('GET /api/configuration error: ', data);
+    }
+  });
+};
+
 var getStl = function(req, res) {
   var url;
   if (req.query.partId != null) {
@@ -149,5 +170,6 @@ router.get('/documents', getDocuments);
 router.get('/elements', getElementList);
 router.get('/stl', getStl);
 router.get('/parts', getPartsList);
+router.get('/configuration', getConfiguration);
 
 module.exports = router;

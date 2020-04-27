@@ -1,6 +1,7 @@
 function init() {
   document.getElementById('get-elements').addEventListener('click', getElements);
   document.getElementById('get-parts').addEventListener('click', getParts);
+  document.getElementById('get-configuration').addEventListener('click', getConfiguration);
   displayOutput('Ready!');
 }
 
@@ -17,6 +18,12 @@ function getElements() {
 
 function getParts() {
   return apiGet('Getting parts', '/api/parts', function(parts) {
+    displayOutput(JSON.stringify(parts, null, 2))
+  })
+}
+
+function getConfiguration() {
+  return apiGet('Getting configuration', '/api/configuration', function(parts) {
     displayOutput(JSON.stringify(parts, null, 2))
   })
 }
