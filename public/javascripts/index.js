@@ -1,6 +1,6 @@
 function init() {
-  var bGetElements = document.getElementById('get-elements');
-  bGetElements.addEventListener('click', getElements);
+  document.getElementById('get-elements').addEventListener('click', getElements);
+  document.getElementById('get-parts').addEventListener('click', getParts);
   displayOutput('Ready!');
 }
 
@@ -10,19 +10,28 @@ function displayOutput(output) {
 }
 
 function getElements() {
-  displayOutput('Getting elements')
+  return apiGet('Getting elements', '/api/elements', function(elements) {
+    displayOutput(JSON.stringify(elements, null, 2))
+  })
+}
+
+function getParts() {
+  return apiGet('Getting parts', '/api/parts', function(parts) {
+    displayOutput(JSON.stringify(parts, null, 2))
+  })
+}
+
+function apiGet(placeholder, apiPath, onResponse) {
+  displayOutput(placeholder)
 
   var dfd = $.Deferred();
-  $.ajax('/api/elements'+ window.location.search, {
+  $.ajax(apiPath + window.location.search, {
       dataType: 'json',
       type: 'GET',
-      success: function(data) {
-         displayOutput(JSON.stringify(data, null, 2))
-      },
-      error: function(err) {
-        displayOutput(err)
-      }
+      success: onResponse,
+      error: displayOutput(err),
   });
+
   return dfd.promise();
 }
 
