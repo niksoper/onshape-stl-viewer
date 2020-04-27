@@ -107,7 +107,7 @@ var getPartsList = function(req, res) {
 var getConfiguration = function(req, res) {
   request.get({
     // uri: `${apiUrl}/api/elements/d/${req.query.documentId}/e/${req.query.elementId}/configuration'`,
-    uri: '/api/elements/d/6357a4c306b124e25201426b/w/7cf32041789e1bcb4efeda57/e/940f7d54dd73d34c9c07799f/configuration/',
+    uri: '/api/elements/d/6357a4c306b124e25201426b/w/7cf32041789e1bcb4efeda57/e/940f7d54dd73d34c9c07799f/configuration',
     headers: {
       'Authorization': 'Bearer ' + req.user.accessToken
     }
