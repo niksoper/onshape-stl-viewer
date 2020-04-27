@@ -68,6 +68,7 @@ var getElementList = function(req, res) {
       'Authorization': 'Bearer ' + req.user.accessToken
     }
   }).then(function(data) {
+    console.log('GOT ELEMENTS', data);
     res.send(data);
   }).catch(function(data) {
     if (data.statusCode === 401) {
