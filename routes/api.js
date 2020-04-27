@@ -111,8 +111,10 @@ var getConfiguration = function(req, res) {
       'Authorization': 'Bearer ' + req.user.accessToken
     }
   }).then(function(data) {
+    console.log('GOT CONFIGURATION', data)
     res.send(data);
   }).catch(function(data) {
+    console.log('ERROR GETTING CONFIGURATION', data)
     if (data.statusCode === 401) {
       authentication.refreshOAuthToken(req, res).then(function() {
         getConfiguration(req, res);
