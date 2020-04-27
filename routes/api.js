@@ -106,7 +106,7 @@ var getPartsList = function(req, res) {
 
 var getConfiguration = function(req, res) {
   request.get({
-    uri: `${apiUrl}/elements/d/${req.query.documentId}/e/${req.query.elementId}/configuration'`,
+    uri: `${apiUrl}/api/elements/d/${req.query.documentId}/e/${req.query.elementId}/configuration'`,
     headers: {
       'Authorization': 'Bearer ' + req.user.accessToken
     }
