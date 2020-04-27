@@ -1,28 +1,29 @@
-(function() {
-  $.ready(function() {
-    $('#get-elements').click(getElements)
-    displayOutput('Ready!')
-  })
+function init() {
+  var bGetElements = document.getElementById('get-elements');
+  bGetElements.addEventListener('click', getElements);
+  displayOutput('Ready!');
+}
 
-  function getElements() {
-    displayOutput('Getting elements')
+function displayOutput(output) {
+  var outputElement = document.getElementById('output');
+  outputElement.innerHTML = output;
+}
 
-    var dfd = $.Deferred();
-    $.ajax('/api/elements'+ window.location.search, {
-        dataType: 'json',
-        type: 'GET',
-        success: function(data) {
-           displayOutput(data)
-        },
-        error: function(err) {
-          displayOutput(err)
-        }
-    });
-    return dfd.promise();
-  }
+function getElements() {
+  displayOutput('Getting elements')
 
-  function displayOutput(output) {
-    $('#output').html(output)
-  }
+  var dfd = $.Deferred();
+  $.ajax('/api/elements'+ window.location.search, {
+      dataType: 'json',
+      type: 'GET',
+      success: function(data) {
+         displayOutput(data)
+      },
+      error: function(err) {
+        displayOutput(err)
+      }
+  });
+  return dfd.promise();
+}
 
-})();
+init();
