@@ -169,10 +169,34 @@ var getStl = function(req, res) {
   });
 };
 
+var testRequest = function(req, res) {
+  request.post({
+    uri: apiUrl + '/api/partstudios/d/0c72c057e1b5b6c2b55f1e56/w/4bdcee6b56a961576bf0bf75/e/77243defd0324bb6946e2e29/stl?grouping=false&scale=1.0&units=inch&mode=text',
+    headers: {
+      'Authorization': 'Bearer ' + req.user.accessToken,
+      'Accept': 'application/vnd.onshape.v1+octet-stream',
+    }
+  }).then(function(data) {
+    console.log('TEST RESPONSE', data);
+    res.send(data);
+  }).catch(function(data) {
+    if (data.statusCode === 401) {
+      authentication.refreshOAuthToken(req, res).then(function() {
+        getElementList(req, res);
+      }).catch(function(err) {
+        console.log('Error in test request: ', err);
+      });
+    } else {
+      console.log('TEST error: ', data);
+    }
+  });
+};
+
 router.get('/documents', getDocuments);
 router.get('/elements', getElementList);
 router.get('/stl', getStl);
 router.get('/parts', getPartsList);
 router.get('/configuration', getConfiguration);
+router.post('/test', testRequest);
 
 module.exports = router;
