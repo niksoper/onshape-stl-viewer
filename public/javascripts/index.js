@@ -4,6 +4,7 @@ function init() {
   document.getElementById('get-elements').addEventListener('click', getElements);
   document.getElementById('get-parts').addEventListener('click', getParts);
   document.getElementById('get-configuration').addEventListener('click', getConfiguration);
+  document.getElementById('test-button').addEventListener('click', getTest);
   displayOutput('Ready!');
 }
 
@@ -37,6 +38,12 @@ function getConfiguration() {
   return apiGet('Getting configuration', '/api/configuration', function(parts) {
     displayOutput(JSON.stringify(parts, null, 2))
   }, queryParams)
+}
+
+function getTest() {
+  return apiGet('Running test', '/api/test', function(result) {
+    displayOutput(JSON.stringify(result, null, 2))
+  })
 }
 
 function apiGet(placeholder, apiPath, onResponse, queryParams) {

@@ -178,7 +178,7 @@ var testRequest = function(req, res) {
     }
   }).then(function(data) {
     console.log('TEST RESPONSE', data);
-    res.send(data);
+    res.send({ msg: 'Just testing', data });
   }).catch(function(data) {
     if (data.statusCode === 401) {
       authentication.refreshOAuthToken(req, res).then(function() {
@@ -197,6 +197,6 @@ router.get('/elements', getElementList);
 router.get('/stl', getStl);
 router.get('/parts', getPartsList);
 router.get('/configuration', getConfiguration);
-router.post('/test', testRequest);
+router.get('/test', testRequest);
 
 module.exports = router;
