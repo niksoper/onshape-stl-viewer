@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var authentication = require('../authentication');
 var request = require('request-promise');
-var axios = require('axios');
+var sendMessage = require('../socket')
 
 var apiUrl = 'https://cad.onshape.com';
 if (process.env.API_URL) {
@@ -184,7 +184,7 @@ var testRequest = function(req, res) {
       // 'Accept': 'application/vnd.onshape.v1+octet-stream',
     }
   }).then(function(text) {
-    console.log('TEXT RESPONSE', text);
+    sendMessage(`Got STL (${text.length})`)
     res.send(text);
   }).catch(function(data) {
     if (data.statusCode === 401) {
