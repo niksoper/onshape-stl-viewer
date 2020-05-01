@@ -184,7 +184,7 @@ var testRequest = function(req, res) {
       // 'Accept': 'application/vnd.onshape.v1+octet-stream',
     }
   }).then(function(text) {
-    sendMessage(`Got STL (${text.length})`)
+    sendMessage(text)
     res.send(text);
   }).catch(function(data) {
     if (data.statusCode === 401) {
