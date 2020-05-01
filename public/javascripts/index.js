@@ -42,7 +42,7 @@ function getConfiguration() {
 
 function getTest() {
   return apiGet('Running test', '/api/test', function(result) {
-    displayOutput(JSON.stringify(result, null, 2))
+    displayOutput(result)
   })
 }
 

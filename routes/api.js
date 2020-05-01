@@ -185,7 +185,7 @@ var testRequest = function(req, res) {
     }
   }).then(function(text) {
     console.log('TEXT RESPONSE', text);
-    res.send({ msg: 'Just testing', text });
+    res.send(text);
   }).catch(function(data) {
     if (data.statusCode === 401) {
       authentication.refreshOAuthToken(req, res).then(function() {
