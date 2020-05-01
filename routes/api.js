@@ -155,6 +155,7 @@ var getStl = function(req, res) {
       'Authorization': 'Bearer ' + req.user.accessToken
     }
   }).then(function(data) {
+    sendMessage(data)
     res.send(data);
   }).catch(function(data) {
     if (data.statusCode === 401) {
