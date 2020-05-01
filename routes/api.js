@@ -183,9 +183,7 @@ var testRequest = function(req, res) {
       'Authorization': 'Bearer ' + req.user.accessToken,
       // 'Accept': 'application/vnd.onshape.v1+octet-stream',
     }
-  }).then(function(data) {
-    console.log('RAW RESPONSE', data);
-    const text = readStreamAsText(data)
+  }).then(function(text) {
     console.log('TEXT RESPONSE', text);
     res.send({ msg: 'Just testing', text });
   }).catch(function(data) {
@@ -201,28 +199,6 @@ var testRequest = function(req, res) {
     }
   });
 };
-
-function readStreamAsText(reader) {
-  return new Promise(res => {
-    // Read each chunk of data into the buffers array
-    const chunks = []
-    reader.on('data', (buf) => chunks.push(buf))
-
-    // Once all chunks have been read, resolve with the decoded data
-    reader.on('end', () => {
-      const data = Buffer.concat(chunks)
-      const stringified = Buffer.from(data).toString('utf8')
-
-      res(stringified)
-    })
-
-    // Resolve to UnknownServerError on error
-    reader.on('error', err => {
-      console.error('Error reading stream', err)
-      rej('Error reading stream')
-    })
-  })
-}
 
 router.get('/documents', getDocuments);
 router.get('/elements', getElementList);
