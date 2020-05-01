@@ -181,7 +181,7 @@ var testRequest = function(req, res) {
     uri: apiUrl + '/api/partstudios/d/0c72c057e1b5b6c2b55f1e56/w/4bdcee6b56a961576bf0bf75/e/77243defd0324bb6946e2e29/stl',
     headers: {
       'Authorization': 'Bearer ' + req.user.accessToken,
-      'Accept': 'application/vnd.onshape.v1+octet-stream',
+      // 'Accept': 'application/vnd.onshape.v1+octet-stream',
     }
   }).then(function(data) {
     console.log('RAW RESPONSE', data);
