@@ -178,8 +178,9 @@ var testRequest = function(req, res) {
       'Accept': 'application/vnd.onshape.v1+octet-stream',
     }
   }).then(function(data) {
+    console.log('RAW RESPONSE', data);
     const text = readStreamAsText(data)
-    console.log('TEST RESPONSE', text);
+    console.log('TEXT RESPONSE', text);
     res.send({ msg: 'Just testing', text });
   }).catch(function(data) {
     if (data.statusCode === 401) {
@@ -190,6 +191,7 @@ var testRequest = function(req, res) {
       });
     } else {
       console.log('TEST error: ', data);
+      res.status(500).send(data)
     }
   });
 };
